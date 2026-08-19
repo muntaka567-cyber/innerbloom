@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fact Finder - Social Bullying & Rejection Assessment</title>
+  <meta name="description" content="InnerBloom Mental Wellness Self Assessment Questionnaire">
+  
+  <!-- 1. MANDATORY SAAS FONTS: Poppins (Headline Bold) & Inter (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    /* 2. WCAG 2.1 AA & SECTION 508 COLOR PALETTE & ACCESSIBILITY RESET */
+    :root {
+      --primary-blue: #1d4ed8;       
+      --dark-blue: #1e3a8a;          
+      --light-blue: #eff6ff;         
+      --border-color: #cbd5e1;       
+      --text-dark: #0f172a;          
+      --text-muted: #475569;         
+      --white: #ffffff;
+      --focus-ring: #2563eb;
+      --error-red: #b91c1c;
+      --warning-orange: #c2410c;
+      --moderate-yellow: #d97706;
+      --success-green: #15803d;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--light-blue);
+      font-family: 'Inter', sans-serif; /* 1. Body font: Inter */
+      color: var(--text-dark);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    /* 1. Headline font: Poppins (Bold) */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    /* 2. Keyboard Navigation Focus Indicators (WCAG compliance) */
+    a:focus-visible, button:focus-visible, input:focus-visible {
+      outline: 3px solid var(--focus-ring);
+      outline-offset: 3px;
+    }
+
+    /* 3. HEADER SECTION (Base Color: Blue) */
+    .header-bar {
+      background-color: var(--primary-blue);
+      color: var(--white);
+      padding: 12px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    /* 4.1 Most Left Element: logo.png */
+    .brand-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .brand-logo {
+      width: 90px;
+      height: 90px;
+      object-fit: contain;
+      border-radius: 6px;
+    }
+
+    .brand-title {
+      color: var(--white);
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+
+    /* 4.2 Most Right Elements */
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-nav {
+      background-color: var(--white);
+      color: var(--primary-blue);
+      font-weight: 600;
+      font-size: 14px;
+      border-radius: 6px;
+      padding: 8px 14px;
+      text-decoration: none;
+      transition: background-color 0.2s ease, transform 0.1s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-nav:hover {
+      background-color: #f1f5f9;
+      transform: translateY(-1px);
+    }
+
+    /* 10. FACTOR NAME HEADER BANNER BELOW MAIN HEADER */
+    .factor-banner {
+      background-color: var(--dark-blue);
+      color: var(--white);
+      text-align: center;
+      padding: 20px;
+      box-shadow: inset 0 -2px 4px rgba(0,0,0,0.1);
+    }
+
+    .factor-banner h1 {
+      color: var(--white);
+      font-size: 22px;
+      letter-spacing: -0.3px;
+    }
+
+    .factor-banner p {
+      font-size: 14px;
+      color: #93c5fd;
+      margin-top: 4px;
+    }
+
+    /* MAIN CONTENT AREA */
+    .workspace-container {
+      max-width: 1100px;
+      width: 100%;
+      margin: 30px auto;
+      padding: 0 20px;
+      flex: 1;
+    }
+
+    .card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 32px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+
+    /* QUESTIONNAIRE TABLE */
+    .table-responsive {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th {
+      background-color: var(--light-blue);
+      color: var(--dark-blue);
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 13.5px;
+      padding: 14px 10px;
+      text-align: center;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    th.question-col {
+      text-align: left;
+      width: 45%;
+    }
+
+    td {
+      padding: 16px 10px;
+      border-bottom: 1px solid var(--border-color);
+      font-size: 14px;
+    }
+
+    td.center-opt {
+      text-align: center;
+    }
+
+    input[type="radio"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--primary-blue);
+      cursor: pointer;
+    }
+
+    /* 6. CENTERED SUBMIT BUTTON AT THE END OF QUESTIONS */
+    .submit-wrapper {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .btn-submit {
+      background-color: var(--primary-blue);
+      color: var(--white);
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      padding: 14px 40px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.1s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-submit:hover {
+      background-color: var(--dark-blue);
+      transform: translateY(-1px);
+    }
+
+    /* 8 & 9. RESULT CARD DISPLAY */
+    .score-card {
+      margin-top: 30px;
+      padding: 24px;
+      border-radius: 10px;
+      background-color: #f8fafc;
+      border: 1.5px solid var(--border-color);
+      display: none;
+      text-align: center;
+    }
+
+    .score-card h2 {
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+
+    .score-number {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .score-message {
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .error-alert {
+      color: var(--error-red);
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    /* FOOTER */
+    footer {
+      background-color: var(--white);
+      border-top: 1px solid var(--border-color);
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13.5px;
+      color: var(--text-muted);
+      margin-top: auto;
+    }
+
+    footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+      margin-right: 16px;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .header-bar {
+        padding: 12px 20px;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .card {
+        padding: 16px;
+      }
+      footer {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 3. BLUE HEADER BAR -->
+  <header class="header-bar" role="banner">
+    <!-- 4.1 Most Left: logo.png -->
+    <a href="#" class="brand-container">
+      <img src="logo.png" alt="InnerBloom Logo" class="brand-logo">
+      <span class="brand-title">InnerBloom</span>
+    </a>
+
+    <!-- 4.2 Most Right Elements -->
+    <nav class="header-actions" aria-label="Main Navigation">
+      <!-- 4.4 Fact Finder Link -->
+      <a href="questionnaire.php" class="btn-nav">
+        <i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Fact Finder
+      </a>
+      <!-- 4.2.a Dashboard Link -->
+      <a href="dashboard.php" class="btn-nav">
+        <i class="fa-solid fa-chart-line" aria-hidden="true"></i> Dashboard
+      </a>
+      <!-- 4.3 Book a Session Link -->
+      <a href="bookappoinment.php" class="btn-nav">
+        <i class="fa-solid fa-calendar-plus" aria-hidden="true"></i> Book a Session
+      </a>
+    </nav>
+  </header>
+
+  <!-- 10. FACTOR NAME HEADER BANNER BELOW TOP HEADER -->
+  <div class="factor-banner" role="region" aria-label="Assessment Topic">
+    <h1>Social Bullying & Rejection Assessment</h1>
+    <p>Confidential Mental Wellness Self-Assessment Questionnaire</p>
+  </div>
+
+  <!-- 5. NOTE: 114.png photocard has been vanished completely -->
+
+  <!-- MAIN CONTENT CONTAINER -->
+  <main class="workspace-container" id="main-content">
+    
+    <section class="card" aria-labelledby="form-heading">
+      <h2 id="form-heading" style="font-size: 18px; color: var(--dark-blue); margin-bottom: 20px;">
+        Please evaluate each statement based on your recent experiences:
+      </h2>
+
+      <form id="quizForm">
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col" class="question-col">Statement</th>
+                <th scope="col">Strongly Disagree</th>
+                <th scope="col">Disagree</th>
+                <th scope="col">Neutral</th>
+                <th scope="col">Agree</th>
+                <th scope="col">Strongly Agree</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1. I feel anxious when I am excluded from social groups.</td>
+                <td class="center-opt"><input type="radio" name="q1" value="5" aria-label="Q1 Strongly Disagree"></td>
+                <td class="center-opt"><input type="radio" name="q1" value="4" aria-label="Q1 Disagree"></td>
+                <td class="center-opt"><input type="radio" name="q1" value="3" aria-label="Q1 Neutral"></td>
+                <td class="center-opt"><input type="radio" name="q1" value="2" aria-label="Q1 Agree"></td>
+                <td class="center-opt"><input type="radio" name="q1" value="0" aria-label="Q1 Strongly Agree"></td>
+              </tr>
+              <tr>
+                <td>2. Negative comments from peers make me feel worthless.</td>
+                <td class="center-opt"><input type="radio" name="q2" value="5" aria-label="Q2 Strongly Disagree"></td>
+                <td class="center-opt"><input type="radio" name="q2" value="4" aria-label="Q2 Disagree"></td>
+                <td class="center-opt"><input type="radio" name="q2" value="3" aria-label="Q2 Neutral"></td>
+                <td class="center-opt"><input type="radio" name="q2" value="2" aria-label="Q2 Agree"></td>
+                <td class="center-opt"><input type="radio" name="q2" value="0" aria-label="Q2 Strongly Agree"></td>
+              </tr>
+              <tr>
+                <td>3. I avoid social situations because I fear being judged.</td>
+                <td class="center-opt"><input type="radio" name="q3" value="5" aria-label="Q3 Strongly Disagree"></td>
+                <td class="center-opt"><input type="radio" name="q3" value="4" aria-label="Q3 Disagree"></td>
+                <td class="center-opt"><input type="radio" name="q3" value="3" aria-label="Q3 Neutral"></td>
+                <td class="center-opt"><input type="radio" name="q3" value="2" aria-label="Q3 Agree"></td>
+                <td class="center-opt"><input type="radio" name="q3" value="0" aria-label="Q3 Strongly Agree"></td>
+              </tr>
+              <tr>
+                <td>4. Bullying experiences have lowered my self-confidence.</td>
+                <td class="center-opt"><input type="radio" name="q4" value="5" aria-label="Q4 Strongly Disagree"></td>
+                <td class="center-opt"><input type="radio" name="q4" value="4" aria-label="Q4 Disagree"></td>
+                <td class="center-opt"><input type="radio" name="q4" value="3" aria-label="Q4 Neutral"></td>
+                <td class="center-opt"><input type="radio" name="q4" value="2" aria-label="Q4 Agree"></td>
+                <td class="center-opt"><input type="radio" name="q4" value="0" aria-label="Q4 Strongly Agree"></td>
+              </tr>
+              <tr>
+                <td>5. I feel isolated when others ignore me in conversations.</td>
+                <td class="center-opt"><input type="radio" name="q5" value="5" aria-label="Q5 Strongly Disagree"></td>
+                <td class="center-opt"><input type="radio" name="q5" value="4" aria-label="Q5 Disagree"></td>
+                <td class="center-opt"><input type="radio" name="q5" value="3" aria-label="Q5 Neutral"></td>
+                <td class="center-opt"><input type="radio" name="q5" value="2" aria-label="Q5 Agree"></td>
+                <td class="center-opt"><input type="radio" name="q5" value="0" aria-label="Q5 Strongly Agree"></td>
+              </tr>
+              <tr>
+                <td>6. Hurtful jokes or teasing affect my emotional wellbeing.</td>
+                <td class="center-opt"><input type="radio" name="q6" value="5" aria-label="Q6 Strongly Disagree"></td>
+                <td class="center-opt"><input type="radio" name="q6" value="4" aria-label="Q6 Disagree"></td>
+                <td class="center-opt"><input type="radio" name="q6" value="3" aria-label="Q6 Neutral"></td>
+                <td class="center-opt"><input type="radio" name="q6" value="2" aria-label="Q6 Agree"></td>
+                <td class="center-opt"><input type="radio" name="q6" value="0" aria-label="Q6 Strongly Agree"></td>
+              </tr>
+              <tr>
+                <td>7. I feel rejected when my opinions are dismissed by others.</td>
+                <td class="center-opt"><input type="radio" name="q7" value="5" aria-label="Q7 Strongly Disagree"></td>
+                <td class="center-opt"><input type="radio" name="q7" value="4" aria-label="Q7 Disagree"></td>
+                <td class="center-opt"><input type="radio" name="q7" value="3" aria-label="Q7 Neutral"></td>
+                <td class="center-opt"><input type="radio" name="q7" value="2" aria-label="Q7 Agree"></td>
+                <td class="center-opt"><input type="radio" name="q7" value="0" aria-label="Q7 Strongly Agree"></td>
+              </tr>
+              <tr>
+                <td>8. Past bullying experiences still affect my daily life.</td>
+                <td class="center-opt"><input type="radio" name="q8" value="5" aria-label="Q8 Strongly Disagree"></td>
+                <td class="center-opt"><input type="radio" name="q8" value="4" aria-label="Q8 Disagree"></td>
+                <td class="center-opt"><input type="radio" name="q8" value="3" aria-label="Q8 Neutral"></td>
+                <td class="center-opt"><input type="radio" name="q8" value="2" aria-label="Q8 Agree"></td>
+                <td class="center-opt"><input type="radio" name="q8" value="0" aria-label="Q8 Strongly Agree"></td>
+              </tr>
+              <tr>
+                <td>9. I feel stressed when I am compared negatively to others.</td>
+                <td class="center-opt"><input type="radio" name="q9" value="5" aria-label="Q9 Strongly Disagree"></td>
+                <td class="center-opt"><input type="radio" name="q9" value="4" aria-label="Q9 Disagree"></td>
+                <td class="center-opt"><input type="radio" name="q9" value="3" aria-label="Q9 Neutral"></td>
+                <td class="center-opt"><input type="radio" name="q9" value="2" aria-label="Q9 Agree"></td>
+                <td class="center-opt"><input type="radio" name="q9" value="0" aria-label="Q9 Strongly Agree"></td>
+              </tr>
+              <tr>
+                <td>10. Social rejection makes me feel disconnected from people around me.</td>
+                <td class="center-opt"><input type="radio" name="q10" value="5" aria-label="Q10 Strongly Disagree"></td>
+                <td class="center-opt"><input type="radio" name="q10" value="4" aria-label="Q10 Disagree"></td>
+                <td class="center-opt"><input type="radio" name="q10" value="3" aria-label="Q10 Neutral"></td>
+                <td class="center-opt"><input type="radio" name="q10" value="2" aria-label="Q10 Agree"></td>
+                <td class="center-opt"><input type="radio" name="q10" value="0" aria-label="Q10 Strongly Agree"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 6. CENTERED SUBMIT BUTTON AT THE END OF QUESTIONS -->
+        <div class="submit-wrapper">
+          <button type="button" class="btn-submit" onclick="calculateScore()">
+            <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Submit Assessment
+          </button>
+        </div>
+      </form>
+
+      <!-- 9. RESULT BOX DISPLAY (SHOWS ONLY TOTAL MARKS & CATEGORIZED MESSAGE, NO BREAKDOWN) -->
+      <div class="score-card" id="resultBox" aria-live="polite">
+        <h2 id="resultTitle">Assessment Result</h2>
+        <span class="score-number" id="scoreValue"></span>
+        <div class="score-message" id="scoreText"></div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ACCESSIBLE FOOTER -->
+  <footer role="contentinfo">
+    <div>
+      <a href="#">Terms of Service</a>
+      <a href="#">Privacy Policy</a>
+    </div>
+    <div>&copy; 2026 InnerBloom Support. All rights reserved.</div>
+  </footer>
+
+  <!-- SCORING JAVASCRIPT -->
+  <script>
+    function calculateScore() {
+      let total = 0;
+      const totalQuestions = 10;
+      let allAnswered = true;
+
+      // 7. MUST ANSWER ALL QUESTIONS VALIDATION
+      for (let i = 1; i <= totalQuestions; i++) {
+        const selected = document.querySelector(`input[name="q${i}"]:checked`);
+        if (!selected) {
+          allAnswered = false;
+          break;
+        }
+        total += parseInt(selected.value, 10);
+      }
+
+      const resultBox = document.getElementById("resultBox");
+      const scoreValue = document.getElementById("scoreValue");
+      const scoreText = document.getElementById("scoreText");
+
+      // Validation check if any question is unselected
+      if (!allAnswered) {
+        resultBox.style.display = "block";
+        scoreValue.innerHTML = "";
+        scoreText.innerHTML = "<p class='error-alert'><i class='fa-solid fa-triangle-exclamation'></i> Please answer all 10 questions to complete the assessment accurately.</p>";
+        return;
+      }
+
+      // 8. FULL 0 TO 50 CATEGORIZED MESSAGES RANGE
+      let resultText = "";
+      let statusColor = "";
+
+      if (total >= 0 && total <= 9) {
+        statusColor = "var(--error-red)"; // Danger Red
+        resultText = "🚨 <strong>Severe Emotional Distress:</strong> Your responses indicate high vulnerability to peer rejection, bullying, and deep social anxiety. Seeking guidance from a mental health professional or counselor is strongly recommended.";
+      } else if (total >= 10 && total <= 19) {
+        statusColor = "var(--warning-orange)"; // Alert Orange
+        resultText = "⚠️ <strong>High Social Strain:</strong> You are experiencing significant emotional strain related to peer comments and social isolation. Reaching out to a trusted counselor is advised.";
+      } else if (total >= 20 && total <= 29) {
+        statusColor = "var(--moderate-yellow)"; // Moderate Yellow/Gold
+        resultText = "😟 <strong>Moderate Sensitivity:</strong> Mild-to-moderate social strain detected. Practicing self-compassion, boundaries, and supportive social engagement will help build your resilience.";
+      } else if (total >= 30 && total <= 39) {
+        statusColor = "var(--success-green)"; // Healthy Green
+        resultText = "🌿 <strong>Balanced & Resilient:</strong> You maintain a healthy emotional perspective when navigating social environments and handling peer feedback.";
+      } else if (total >= 40 && total <= 50) {
+        statusColor = "var(--dark-blue)"; // SaaS Deep Blue
+        resultText = "🔥 <strong>Exceptional Social Resilience:</strong> You possess strong psychological boundaries and social confidence, unaffected by peer rejection or external judgment.";
+      }
+
+      // 9. SHOW ONLY TOTAL MARKS AND MESSAGE (NO ITEMIZED BREAKDOWN)
+      resultBox.style.display = "block";
+      scoreValue.style.color = statusColor;
+      scoreValue.textContent = `${total} / 50`;
+      scoreText.style.color = statusColor;
+      scoreText.innerHTML = resultText;
+    }
+  </script>
+
+</body>
+</html>

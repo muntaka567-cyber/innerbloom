@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dr. Asif Zubayer - InnerBloom Profile</title>
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts: Poppins (Bold Headings) & Inter (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-color: #f0f7ff;
+      --card-bg: #ffffff;
+      --header-blue: #1d4ed8;      /* High contrast accessible deep blue (>7:1) */
+      --header-hover: #1e40af;
+      --text-dark: #0f172a;        
+      --text-muted: #475569;
+      --primary-blue: #2563eb;
+      --purple-accent: #6d28d9;
+      --green-accent: #047857;
+      --border-color: #bfdbfe;
+      --divider-color: #cbd5e1;
+      --focus-ring: #ffd600;       /* High visibility keyboard navigation indicator */
+      --star-yellow: #d97706;
+      --font-headline: 'Poppins', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-color);
+      color: var(--text-dark);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-headline);
+      font-weight: 700;
+    }
+
+    /* WCAG Focus Indicators for Accessibility */
+    :focus-visible {
+      outline: 3px solid var(--focus-ring);
+      outline-offset: 3px;
+    }
+
+    /* Section 508 / WCAG Bypass Skip Link */
+    .skip-link {
+      position: absolute;
+      top: -60px;
+      left: 1rem;
+      background: var(--focus-ring);
+      color: #000000;
+      padding: 0.6rem 1.2rem;
+      z-index: 1000;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: 700;
+      transition: top 0.2s ease;
+    }
+    .skip-link:focus { 
+      top: 1rem; 
+    }
+
+    /* Blue Header Section */
+    header {
+      background-color: var(--header-blue);
+      color: #ffffff;
+      padding: 0.75rem 2rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* 4.1 Most Left: logo.png (InnerBloom) sized exactly 90x90px */
+    .header-logo-link {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: #ffffff;
+      font-family: var(--font-headline);
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    .header-logo-link img {
+      width: 90px;
+      height: 90px;
+      object-fit: contain;
+      display: block;
+      border-radius: 6px;
+    }
+
+    /* 4.2 Most Right: Navigation Elements */
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 0.6rem 1rem;
+      border-radius: 6px;
+      transition: background-color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      background-color: var(--header-hover);
+    }
+
+    /* Outer Wrapper Container */
+    .profile-container {
+      max-width: 1000px;
+      width: 100%;
+      margin: 2.5rem auto;
+      padding: 0 1.5rem;
+      flex: 1;
+    }
+
+    /* Main Card Layout */
+    .main-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(37, 99, 235, 0.08);
+      border: 1px solid var(--border-color);
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Top Profile Section */
+    .profile-header {
+      display: flex;
+      gap: 2rem;
+      padding-bottom: 1.75rem;
+      border-bottom: 1px solid var(--divider-color);
+    }
+
+    .profile-img-container {
+      flex-shrink: 0;
+      width: 220px;
+      height: 260px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 2px solid var(--border-color);
+    }
+
+    .profile-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .profile-header-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      flex-grow: 1;
+    }
+
+    .profile-name {
+      font-size: 2.2rem;
+      color: var(--text-dark);
+      border-bottom: 2px solid var(--divider-color);
+      padding-bottom: 6px;
+      margin-bottom: 6px;
+    }
+
+    .profile-title {
+      font-size: 1.2rem;
+      color: var(--purple-accent);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .meta-item {
+      font-size: 0.95rem;
+      color: var(--text-dark);
+      padding: 6px 0;
+      border-bottom: 1px solid #f1f5f9;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .meta-item:last-of-type {
+      border-bottom: none;
+    }
+
+    .meta-item i {
+      font-size: 1.1rem;
+      width: 24px;
+      text-align: center;
+    }
+
+    .meta-item.degrees {
+      font-weight: 600;
+    }
+
+    .meta-item.experience {
+      color: var(--green-accent);
+      font-weight: 700;
+    }
+
+    .icon-star { color: var(--star-yellow); }
+    .icon-brain { color: var(--primary-blue); }
+
+    /* Grid Layout for Details */
+    .profile-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 2rem;
+      margin-top: 1.75rem;
+    }
+
+    .column-title {
+      color: var(--text-dark);
+      font-size: 1.3rem;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--border-color);
+      margin-bottom: 1rem;
+    }
+
+    .about-text {
+      color: var(--text-dark);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .clinic-box {
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.25rem;
+      background-color: var(--bg-color);
+    }
+
+    .clinic-title {
+      color: var(--primary-blue);
+      font-size: 1.05rem;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .clinic-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .clinic-list li {
+      font-size: 0.9rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .clinic-list li i {
+      color: var(--primary-blue);
+      margin-top: 3px;
+      width: 16px;
+      text-align: center;
+    }
+
+    /* Specialty Profile Cards */
+    .specialty-profile-box {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .specialty-card {
+      background-color: var(--bg-color);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1rem;
+    }
+
+    .specialty-card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 6px;
+    }
+
+    .specialty-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .specialty-title-text {
+      font-weight: 700;
+      color: var(--text-dark);
+      font-size: 0.95rem;
+    }
+
+    .specialty-description {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+      padding-left: 48px;
+    }
+
+    .spec-therapy { background-color: #dbeafe; color: #1e40af; }
+    .spec-family { background-color: #f3e8ff; color: #6b21a8; }
+    .spec-growth { background-color: #ccfbf1; color: #0f766e; }
+
+    /* Action Buttons Area */
+    .action-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background-color: var(--primary-blue);
+      color: #ffffff;
+      text-decoration: none;
+      padding: 0.9rem 1.25rem;
+      border-radius: 8px;
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .btn:hover {
+      background-color: var(--header-hover);
+    }
+
+    .btn-secondary {
+      background-color: #dbeafe;
+      color: var(--text-dark);
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--border-color);
+    }
+
+    /* Bottom Information Cards */
+    .bottom-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1.25rem;
+    }
+
+    .info-card {
+      background: var(--card-bg);
+      border-radius: 8px;
+      padding: 1.25rem;
+      border: 1px solid var(--border-color);
+    }
+
+    .info-card-title {
+      color: var(--text-dark);
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+      border-bottom: 1.5px solid var(--border-color);
+    }
+
+    .info-card-text {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      line-height: 1.45;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .header-container {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .profile-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .profile-img-container {
+        width: 180px;
+        height: 220px;
+      }
+      .meta-item {
+        justify-content: center;
+      }
+      .profile-grid {
+        grid-template-columns: 1fr;
+      }
+      .specialty-description {
+        padding-left: 0;
+        text-align: center;
+      }
+      .specialty-card-header {
+        flex-direction: column;
+        text-align: center;
+      }
+      .action-buttons {
+        grid-template-columns: 1fr;
+      }
+      .bottom-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- WCAG 2.1 AA / Section 508 Skip Link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Header Navigation -->
+  <header role="banner">
+    <div class="header-container">
+      
+      <!-- 4.1 Most Left: logo.png (InnerBloom) sized 90x90px -->
+      <a href="/" class="header-logo-link" aria-label="InnerBloom Home Page">
+        <img src="logo.png" alt="InnerBloom Logo" width="90" height="90">
+        <span>InnerBloom</span>
+      </a>
+
+      <!-- 4.2 Most Right: Navigation Links -->
+      <nav role="navigation" aria-label="Main Navigation">
+        <ul class="nav-links">
+          <li>
+            <a href="bookappointment.php">
+              <i class="fa-regular fa-calendar-check" aria-hidden="true"></i> GO BACK
+            </a>
+          </li>
+          
+          
+        </ul>
+      </nav>
+
+    </div>
+  </header>
+
+  <!-- Main Profile Container -->
+  <div class="profile-container">
+
+    <!-- MAIN CARD -->
+    <main id="main-content" class="main-card" tabindex="-1">
+      
+      <!-- Top Profile Info Header -->
+      <section class="profile-header">
+        <div class="profile-img-container">
+          <img class="profile-img" src="male4.png" alt="Dr. Asif Zubayer Portrait">
+        </div>
+        <div class="profile-header-info">
+          <h1 class="profile-name">Dr. Asif Zubayer</h1>
+          <div class="profile-title">Therapist</div>
+          
+          <div class="meta-item degrees">
+            <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
+            <span>MS in Psychotherapy, Certified Behavioral Consultant</span>
+          </div>
+          <div class="meta-item experience">
+            <i class="fa-solid fa-briefcase" aria-hidden="true"></i>
+            <span>5 Years of Clinical Experience</span>
+          </div>
+          <div class="meta-item">
+            <i class="fa-solid fa-star icon-star" aria-hidden="true"></i>
+            <span>4.8 Rating (84 Patient Reviews)</span>
+          </div>
+          <div class="meta-item">
+            <i class="fa-solid fa-brain icon-brain" aria-hidden="true"></i>
+            <span>Specialized in Cognitive Restructuring & Individual Psychotherapy</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bottom Grid Sections -->
+      <div class="profile-grid">
+        
+        <!-- Left Column (About + Clinic Information) -->
+        <section aria-labelledby="about-heading">
+          <h2 id="about-heading" class="column-title">About Me</h2>
+          <p class="about-text">
+            I am a dedicated therapist based in Khulna, specializing in structured cognitive restructuring and individual psychotherapy. My approach emphasizes actionable stress mitigation management plans designed to build sustainable mental health and emotional resilience.
+          </p>
+
+          <div class="clinic-box">
+            <h3 class="clinic-title">
+              <i class="fa-solid fa-clinic-medical" aria-hidden="true"></i> Clinic Information
+            </h3>
+            <ul class="clinic-list">
+              <li>
+                <i class="fa-solid fa-building" aria-hidden="true"></i>
+                <span><strong>Khulna Counseling & Therapy Center</strong></span>
+              </li>
+              <li>
+                <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                <span>Location: KDA Avenue, Khulna, Bangladesh</span>
+              </li>
+              <li>
+                <i class="fa-regular fa-clock" aria-hidden="true"></i>
+                <span>Visiting Hours: Sat - Thu: 4pm - 8pm (Closed: Friday)</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-phone" aria-hidden="true"></i>
+                <span>Contact: +880 1400-998877 | support@khulnatherapy.com</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Right Column (Specialties Profile Cards) -->
+        <section aria-labelledby="specialty-heading">
+          <h2 id="specialty-heading" class="column-title">Specialization Profile</h2>
+          <div class="specialty-profile-box">
+            
+            <!-- Specialty Card 1 -->
+            <div class="specialty-card">
+              <div class="specialty-card-header">
+                <div class="specialty-icon spec-therapy">
+                  <i class="fa-solid fa-comments" aria-hidden="true"></i>
+                </div>
+                <span class="specialty-title-text">Individual Psychotherapy</span>
+              </div>
+              <p class="specialty-description">
+                Personalized, confidential sessions focusing on identifying underlying emotional conflicts and behavioral loops.
+              </p>
+            </div>
+
+            <!-- Specialty Card 2 -->
+            <div class="specialty-card">
+              <div class="specialty-card-header">
+                <div class="specialty-icon spec-family">
+                  <i class="fa-solid fa-arrows-spin" aria-hidden="true"></i>
+                </div>
+                <span class="specialty-title-text">Cognitive Restructuring</span>
+              </div>
+              <p class="specialty-description">
+                Action-oriented strategies helping clients reframe unhelpful thought patterns and build effective mental coping tools.
+              </p>
+            </div>
+
+            <!-- Specialty Card 3 -->
+            <div class="specialty-card">
+              <div class="specialty-card-header">
+                <div class="specialty-icon spec-growth">
+                  <i class="fa-solid fa-heart-pulse" aria-hidden="true"></i>
+                </div>
+                <span class="specialty-title-text">Coping & Stress Counseling</span>
+              </div>
+              <p class="specialty-description">
+                Targeted counseling methods to manage daily burnout, mitigate stress, and achieve emotional balance.
+              </p>
+            </div>
+
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+    <!-- ACTION BUTTONS -->
+    <div class="action-buttons">
+      <a href="bookappointment.php" class="btn">
+        <i class="fa-regular fa-calendar-days" aria-hidden="true"></i> Book Appointment
+      </a>
+      <button type="button" class="btn btn-secondary">
+        <i class="fa-regular fa-comments" aria-hidden="true"></i> Send Direct Message
+      </button>
+    </div>
+
+    <!-- BOTTOM CARDS -->
+    <footer class="bottom-cards">
+      <div class="info-card">
+        <h3 class="info-card-title">Patient Testimonials</h3>
+        <p class="info-card-text">
+          "Dr. Asif Zubayer provided an amazingly insightful perspective during our sessions. Highly recommended for structured behavioral changes!"
+        </p>
+      </div>
+
+      <div class="info-card">
+        <h3 class="info-card-title">Consultation Fees</h3>
+        <p class="info-card-text">
+          <strong>Consultation Fee:</strong> ৳ 900<br>
+          <em>Online & In-person options available.</em>
+        </p>
+      </div>
+
+      <div class="info-card">
+        <h3 class="info-card-title">Emergency Contact</h3>
+        <p class="info-card-text">
+          For urgent mental health assistance or immediate crisis helpline support, call <strong>+880 9611-677777</strong> (24/7).
+        </p>
+      </div>
+    </footer>
+
+  </div>
+
+</body>
+</html>

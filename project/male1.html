@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dr. Ahsan Rahman - InnerBloom Profile</title>
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Fonts: Poppins (Headline Bold) & Inter (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-light-blue: #f0f7ff;     
+      --card-white: #ffffff;       
+      --header-blue: #1d4ed8;      
+      --text-navy: #1e3a8a;          
+      --border-blue: #bfdbfe;        
+      --primary-blue: #2563eb;       
+      --primary-hover: #1e40af;     
+      --tint-blue: #dbeafe;         
+      --focus-ring: #1d4ed8;        
+      --star-yellow: #f59e0b;
+      --font-headline: 'Poppins', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--text-navy);
+      background-color: var(--bg-light-blue);
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* WCAG Focus Indicators for Keyboard Navigation */
+    :focus-visible {
+      outline: 3px solid var(--focus-ring);
+      outline-offset: 2px;
+    }
+
+    /* Section 508 / WCAG Bypass Link */
+    .skip-link {
+      position: absolute;
+      top: -50px;
+      left: 1rem;
+      background: var(--header-blue);
+      color: #ffffff;
+      padding: 0.5rem 1rem;
+      z-index: 1000;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+    .skip-link:focus { top: 1rem; }
+
+    /* Header Styling */
+    header {
+      background-color: var(--header-blue);
+      color: #ffffff;
+      padding: 0.85rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.15);
+    }
+
+    .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    .header-logo img {
+      max-height: 90px;
+      width: 90px;
+      display: block;
+      object-fit: contain;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    nav a {
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9rem;
+      padding: 0.5rem 0.85rem;
+      border-radius: 6px;
+      transition: background-color 0.2s;
+    }
+
+    nav a:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Layout Container */
+    .profile-container {
+      max-width: 1000px;
+      width: 100%;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+      flex: 1;
+    }
+
+    /* Card Component */
+    .card {
+      background: var(--card-white);
+      border: 1.5px solid var(--border-blue);
+      border-radius: 12px;
+      padding: 1.75rem;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.04);
+      margin-bottom: 1.5rem;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: var(--font-headline);
+      color: var(--text-navy);
+      font-weight: 700;
+    }
+
+    /* Profile Header Layout */
+    .profile-header {
+      display: flex;
+      gap: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1.5px solid var(--border-blue);
+    }
+
+    .profile-img-container {
+      position: relative;
+      flex-shrink: 0;
+      width: 220px;
+      height: 260px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 2px solid var(--border-blue);
+    }
+
+    .profile-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .online-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 16px;
+      height: 16px;
+      background-color: #22c55e;
+      border: 2px solid #ffffff;
+      border-radius: 50%;
+    }
+
+    .profile-header-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      flex-grow: 1;
+    }
+
+    .profile-name-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .profile-name {
+      font-size: 2rem;
+      color: var(--text-navy);
+    }
+
+    .verified-badge {
+      color: var(--primary-blue);
+      font-size: 1.25rem;
+    }
+
+    .profile-title {
+      font-size: 1.15rem;
+      color: var(--primary-blue);
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .meta-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .meta-item {
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      color: var(--text-navy);
+    }
+
+    .meta-item i {
+      color: var(--primary-blue);
+      width: 20px;
+      text-align: center;
+    }
+
+    .meta-item .rating-star {
+      color: var(--star-yellow);
+    }
+
+    .fee-badge {
+      display: inline-block;
+      background: var(--tint-blue);
+      color: var(--text-navy);
+      padding: 0.35rem 0.85rem;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      width: fit-content;
+      margin-top: 0.5rem;
+      border: 1px solid var(--border-blue);
+    }
+
+    /* Grid Layout for Details */
+    .profile-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .column-title {
+      font-size: 1.25rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--border-blue);
+      margin-bottom: 1rem;
+    }
+
+    .about-text {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      color: var(--text-navy);
+    }
+
+    .clinic-box {
+      border: 1.5px solid var(--border-blue);
+      border-radius: 10px;
+      padding: 1.25rem;
+      background-color: var(--bg-light-blue);
+    }
+
+    .clinic-title {
+      font-size: 1rem;
+      margin-bottom: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .clinic-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    .clinic-list li {
+      font-size: 0.88rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+    }
+
+    .clinic-list li i {
+      color: var(--primary-blue);
+      margin-top: 3px;
+    }
+
+    /* Specialties Cards */
+    .specialty-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .specialty-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.75rem;
+      background: var(--bg-light-blue);
+      border: 1px solid var(--border-blue);
+      border-radius: 8px;
+    }
+
+    .specialty-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--tint-blue);
+      color: var(--primary-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .specialty-text {
+      font-weight: 600;
+      color: var(--text-navy);
+      font-size: 0.9rem;
+    }
+
+    /* Action Buttons */
+    .action-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.65rem;
+      background-color: var(--primary-blue);
+      color: #ffffff;
+      text-decoration: none;
+      padding: 0.85rem 1.25rem;
+      border-radius: 8px;
+      font-family: var(--font-headline);
+      font-weight: 600;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .btn:hover { background-color: var(--primary-hover); }
+
+    .btn-secondary {
+      background-color: var(--tint-blue);
+      color: var(--text-navy);
+      border: 1px solid var(--border-blue);
+    }
+
+    .btn-secondary:hover { background-color: var(--border-blue); }
+
+    /* Footer Cards */
+    .bottom-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1.25rem;
+    }
+
+    .info-card {
+      background: var(--card-white);
+      border-radius: 10px;
+      padding: 1.25rem;
+      border: 1.5px solid var(--border-blue);
+    }
+
+    .info-card-title {
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+      padding-bottom: 0.35rem;
+      border-bottom: 1.5px solid var(--border-blue);
+    }
+
+    .info-card-text {
+      color: var(--text-navy);
+      font-size: 0.82rem;
+      line-height: 1.5;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .profile-header { flex-direction: column; align-items: center; text-align: center; }
+      .profile-img-container { width: 180px; height: 220px; }
+      .profile-grid { grid-template-columns: 1fr; }
+      .action-buttons { grid-template-columns: 1fr; }
+      .bottom-cards { grid-template-columns: 1fr; }
+      .profile-name-row { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- WCAG Skip Navigation Link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Header Navigation -->
+  <header>
+    <a href="/" class="header-logo" aria-label="InnerBloom Home">
+      <img src="logo.png" alt="InnerBloom Logo">
+      <span>InnerBloom</span>
+    </a>
+    <nav aria-label="Main Navigation">
+      <ul>
+        <li>
+          <a href="bookappointment.php">
+            <i class="fa-regular fa-calendar-check" aria-hidden="true"></i> GO BACK
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Profile Container -->
+  <div class="profile-container">
+    <main id="main-content" class="card">
+      
+      <!-- Profile Header Section -->
+      <section class="profile-header">
+        <div class="profile-img-container">
+          <img class="profile-img" src="male1.png" alt="Dr. Ahsan Rahman Portrait">
+          <span class="online-badge" title="Online Now"></span>
+        </div>
+        <div class="profile-header-info">
+          <div class="profile-name-row">
+            <h1 class="profile-name">Dr. Ahsan Rahman</h1>
+            <i class="fa-solid fa-circle-check verified-badge" title="Verified Practitioner" aria-label="Verified Practitioner"></i>
+          </div>
+          <div class="profile-title">Psychiatrist</div>
+          
+          <div class="meta-list">
+            <div class="meta-item">
+              <i class="fa-solid fa-star rating-star" aria-hidden="true"></i>
+              <span><strong>4.9</strong> (120 reviews)</span>
+            </div>
+            <div class="meta-item">
+              <i class="fa-solid fa-briefcase" aria-hidden="true"></i>
+              <span>8 Years Experience</span>
+            </div>
+            <div class="meta-item">
+              <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+              <span>Dhaka, Bangladesh</span>
+            </div>
+            <div class="meta-item">
+              <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
+              <span><strong>Qualifications:</strong> MBBS, FCPS (Psychiatry)</span>
+            </div>
+          </div>
+
+          <div class="fee-badge">
+            Consultation Fee: ৳ 1200
+          </div>
+        </div>
+      </section>
+
+      <!-- Profile Details Grid -->
+      <div class="profile-grid">
+        
+        <!-- Left Column: About & Clinic -->
+        <section aria-labelledby="about-heading">
+          <h2 id="about-heading" class="column-title">About Me</h2>
+          <p class="about-text">
+            I am a dedicated Psychiatrist with over 8 years of clinical experience in treating complex mental health conditions. I focus on compassionate, evidence-based psychiatric evaluations, medication management, and holistic mental wellness care.
+          </p>
+
+          <div class="clinic-box">
+            <h3 class="clinic-title">
+              <i class="fa-solid fa-clinic-medical" aria-hidden="true"></i>
+              Clinic Information
+            </h3>
+            <ul class="clinic-list">
+              <li>
+                <i class="fa-solid fa-building" aria-hidden="true"></i>
+                <span><strong>MindCare Psychiatric Center</strong></span>
+              </li>
+              <li>
+                <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                <span>Block C, Road 7, Gulshan, Dhaka - 1212</span>
+              </li>
+              <li>
+                <i class="fa-regular fa-clock" aria-hidden="true"></i>
+                <span>Sun - Thu: 04:00 PM - 09:00 PM (Closed: Fri & Sat)</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-phone" aria-hidden="true"></i>
+                <span>+880 9610088991 | contact@mindcare.com</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Right Column: Specialties -->
+        <section aria-labelledby="specialties-heading">
+          <h2 id="specialties-heading" class="column-title">Specialties</h2>
+          <div class="specialty-list">
+            <div class="specialty-item">
+              <div class="specialty-icon"><i class="fa-solid fa-brain" aria-hidden="true"></i></div>
+              <span class="specialty-text">Clinical Psychiatry & Diagnosis</span>
+            </div>
+            <div class="specialty-item">
+              <div class="specialty-icon"><i class="fa-solid fa-pills" aria-hidden="true"></i></div>
+              <span class="specialty-text">Psychopharmacology & Medication</span>
+            </div>
+            <div class="specialty-item">
+              <div class="specialty-icon"><i class="fa-solid fa-face-smile" aria-hidden="true"></i></div>
+              <span class="specialty-text">Mood & Anxiety Disorders</span>
+            </div>
+            <div class="specialty-item">
+              <div class="specialty-icon"><i class="fa-solid fa-heart-pulse" aria-hidden="true"></i></div>
+              <span class="specialty-text">Stress & Psychosomatic Health</span>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+    <!-- Rewritten Action Buttons -->
+    <div class="action-buttons">
+      <a href="AppointmentForm.php" class="btn">
+        <i class="fa-regular fa-calendar-days" aria-hidden="true"></i> BOOK APPOINTMENT
+      </a>
+      <button type="button" class="btn btn-secondary">
+        <i class="fa-regular fa-comments" aria-hidden="true"></i> Send Direct Message
+      </button>
+    </div>
+
+    <!-- Bottom Informational Footer Cards -->
+    <footer class="bottom-cards">
+      <div class="info-card">
+        <h4 class="info-card-title">Patient Testimonials</h4>
+        <p class="info-card-text">Read how I've helped others improve their lives and overcome mental health challenges.</p>
+      </div>
+      <div class="info-card">
+        <h4 class="info-card-title">Treatment Methods</h4>
+        <p class="info-card-text">Learn about psychiatric evaluations, structured medical options, and follow-up care.</p>
+      </div>
+      <div class="info-card">
+        <h4 class="info-card-title">Mental Health Resources</h4>
+        <p class="info-card-text">Access articles, psychiatric tips, and support resources for your well-being.</p>
+      </div>
+    </footer>
+  </div>
+
+</body>
+</html>

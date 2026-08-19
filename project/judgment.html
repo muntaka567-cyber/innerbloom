@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fact Finder - Mental Wellness Questionnaire</title>
+  
+  <!-- Google Fonts: Poppins (Headlines) & Inter (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* RESET & BASE STYLES */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f4f7f9;
+      font-family: 'Inter', sans-serif;
+      color: #1e293b;
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, h4, th {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* ACCESSIBILITY: SKIP LINK & FOCUS STATES */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 10px;
+      background: #1e40af;
+      color: #ffffff;
+      padding: 8px 16px;
+      z-index: 100;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .skip-link:focus {
+      top: 10px;
+    }
+
+    :focus-visible {
+      outline: 3px solid #1d4ed8;
+      outline-offset: 2px;
+    }
+
+    /* HEADER NAVBAR */
+    header {
+      background-color: #1e40af; /* Primary Blue */
+      color: #ffffff;
+      padding: 16px 0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .nav-container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo-container img {
+      height: 45px;
+      width: auto;
+      display: block;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 6px;
+      transition: background-color 0.2s;
+    }
+
+    .nav-links a:hover {
+      background-color: #1e3a8a;
+    }
+
+    /* PAGE TITLE BANNER */
+    .page-title-banner {
+      background-color: #eff6ff;
+      border-bottom: 1px solid #dbeafe;
+      padding: 24px 0;
+      text-align: center;
+    }
+
+    .page-title-banner h1 {
+      color: #1e3a8a;
+      font-size: 1.8rem;
+    }
+
+    /* MAIN CONTAINER */
+    .main-content {
+      width: 90%;
+      max-width: 1100px;
+      margin: 40px auto;
+    }
+
+    .form-card {
+      background: #ffffff;
+      padding: 32px;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      border: 1px solid #e2e8f0;
+    }
+
+    /* TABLE STYLES */
+    .table-responsive {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 24px;
+    }
+
+    th, td {
+      padding: 16px 12px;
+      text-align: left;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    th {
+      background-color: #f8fafc;
+      color: #1e293b;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      text-align: center;
+    }
+
+    th:first-child {
+      text-align: left;
+      width: 45%;
+    }
+
+    td {
+      text-align: center;
+    }
+
+    td:first-child {
+      text-align: left;
+      font-size: 0.95rem;
+    }
+
+    input[type="radio"] {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      accent-color: #1e40af;
+    }
+
+    /* VALIDATION ERROR MSG */
+    .error-alert {
+      display: none;
+      background-color: #fef2f2;
+      border: 1px solid #fca5a5;
+      color: #991b1b;
+      padding: 12px 16px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: 500;
+    }
+
+    /* SUBMIT BUTTON CONTAINER */
+    .submit-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 32px;
+    }
+
+    .btn-submit {
+      background-color: #15803d;
+      color: #ffffff;
+      padding: 14px 40px;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .btn-submit:hover {
+      background-color: #166534;
+    }
+
+    /* SCORE DISPLAY BOX */
+    .score-box {
+      display: none;
+      margin-top: 32px;
+      background-color: #f8fafc;
+      border: 2px solid #cbd5e1;
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .score-box h2 {
+      font-size: 1.5rem;
+      color: #0f172a;
+      margin-bottom: 12px;
+    }
+
+    .score-number {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #1e40af;
+      margin-bottom: 8px;
+    }
+
+    .score-message {
+      font-size: 1.05rem;
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    /* ACCESSIBLE FOOTER */
+    footer {
+      background-color: #0f172a;
+      color: #f8fafc;
+      padding: 48px 0 24px 0;
+      margin-top: 60px;
+    }
+
+    .footer-grid {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 32px;
+    }
+
+    .footer-col h3, .footer-col h4 {
+      color: #60a5fa;
+      margin-bottom: 16px;
+      font-size: 1rem;
+    }
+
+    .footer-col p, .footer-col ul li a {
+      color: #cbd5e1;
+      font-size: 0.9rem;
+      text-decoration: none;
+      line-height: 1.8;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col ul li a:hover {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+
+    .copyright {
+      text-align: center;
+      border-top: 1px solid #1e293b;
+      margin-top: 40px;
+      padding-top: 20px;
+      font-size: 0.85rem;
+      color: #94a3b8;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Skip Link for Accessibility -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Blue Header Navbar -->
+  <header role="banner">
+    <div class="nav-container">
+      <a href="INDEX.PHP" class="logo-container" aria-label="InnerBloom Home">
+        <img src="logo.png" alt="InnerBloom Mental Wellness Logo">
+      </a>
+      <nav aria-label="Main Navigation">
+        <ul class="nav-links">
+          <li><a href="dashboard.php">Dashboard</a></li>
+          <li><a href="bookappointment.php">Book Session</a></li>
+          <li><a href="questionnaire.php" aria-current="page">Fact Finder</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Top Banner showing 'Fact Finder' title -->
+  <div class="page-title-banner">
+    <h1>Fact Finder — Mental Wellness Self Assessment</h1>
+  </div>
+
+  <!-- Main Content Area -->
+  <main id="main-content" class="main-content">
+    <div class="form-card">
+      
+      <!-- Validation Alert -->
+      <div id="errorAlert" class="error-alert" role="alert" aria-live="assertive">
+        Please answer all 10 questions before submitting.
+      </div>
+
+      <form id="quizForm" aria-label="Wellness Questionnaire Form">
+        <div class="table-responsive">
+          <table>
+            <caption>Respond to all statements based on your experience</caption>
+            <thead>
+              <tr>
+                <th scope="col">Questions</th>
+                <th scope="col">Strongly Disagree</th>
+                <th scope="col">Disagree</th>
+                <th scope="col">Neutral</th>
+                <th scope="col">Agree</th>
+                <th scope="col">Strongly Agree</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1. I avoid raising my hand or speaking up in class/meetings because I am afraid of saying something wrong.</td>
+                <td><input type="radio" name="q1" value="5" aria-label="Question 1 Strongly Disagree"></td>
+                <td><input type="radio" name="q1" value="4" aria-label="Question 1 Disagree"></td>
+                <td><input type="radio" name="q1" value="3" aria-label="Question 1 Neutral"></td>
+                <td><input type="radio" name="q1" value="2" aria-label="Question 1 Agree"></td>
+                <td><input type="radio" name="q1" value="0" aria-label="Question 1 Strongly Agree"></td>
+              </tr>
+              <tr>
+                <td>2. I constantly overthink what I said or how I acted after hanging out with a group of people.</td>
+                <td><input type="radio" name="q2" value="5" aria-label="Question 2 Strongly Disagree"></td>
+                <td><input type="radio" name="q2" value="4" aria-label="Question 2 Disagree"></td>
+                <td><input type="radio" name="q2" value="3" aria-label="Question 2 Neutral"></td>
+                <td><input type="radio" name="q2" value="2" aria-label="Question 2 Agree"></td>
+                <td><input type="radio" name="q2" value="0" aria-label="Question 2 Strongly Agree"></td>
+              </tr>
+              <tr>
+                <td>3. I hesitate to post my opinions or creative work online out of fear of negative comments or backlash.</td>
+                <td><input type="radio" name="q3" value="5" aria-label="Question 3 Strongly Disagree"></td>
+                <td><input type="radio" name="q3" value="4" aria-label="Question 3 Disagree"></td>
+                <td><input type="radio" name="q3" value="3" aria-label="Question 3 Neutral"></td>
+                <td><input type="radio" name="q3" value="2" aria-label="Question 3 Agree"></td>
+                <td><input type="radio" name="q3" value="0" aria-label="Question 3 Strongly Agree"></td>
+              </tr>
+              <tr>
+                <td>4. I change the way I dress, talk, or act just to avoid being mocked or judged by my peers.</td>
+                <td><input type="radio" name="q4" value="5" aria-label="Question 4 Strongly Disagree"></td>
+                <td><input type="radio" name="q4" value="4" aria-label="Question 4 Disagree"></td>
+                <td><input type="radio" name="q4" value="3" aria-label="Question 4 Neutral"></td>
+                <td><input type="radio" name="q4" value="2" aria-label="Question 4 Agree"></td>
+                <td><input type="radio" name="q4" value="0" aria-label="Question 4 Strongly Agree"></td>
+              </tr>
+              <tr>
+                <td>5. I feel deeply anxious when walking into a room full of people, assuming that everyone is looking at and evaluating me.</td>
+                <td><input type="radio" name="q5" value="5" aria-label="Question 5 Strongly Disagree"></td>
+                <td><input type="radio" name="q5" value="4" aria-label="Question 5 Disagree"></td>
+                <td><input type="radio" name="q5" value="3" aria-label="Question 5 Neutral"></td>
+                <td><input type="radio" name="q5" value="2" aria-label="Question 5 Agree"></td>
+                <td><input type="radio" name="q5" value="0" aria-label="Question 5 Strongly Agree"></td>
+              </tr>
+              <tr>
+                <td>6. I find it difficult to say "no" to others because I am worried they will think poorly of me or exclude me.</td>
+                <td><input type="radio" name="q6" value="5" aria-label="Question 6 Strongly Disagree"></td>
+                <td><input type="radio" name="q6" value="4" aria-label="Question 6 Disagree"></td>
+                <td><input type="radio" name="q6" value="3" aria-label="Question 6 Neutral"></td>
+                <td><input type="radio" name="q6" value="2" aria-label="Question 6 Agree"></td>
+                <td><input type="radio" name="q6" value="0" aria-label="Question 6 Strongly Agree"></td>
+              </tr>
+              <tr>
+                <td>7. If someone leaves my message on "read" or takes a long time to reply, I immediately worry that I upset them.</td>
+                <td><input type="radio" name="q7" value="5" aria-label="Question 7 Strongly Disagree"></td>
+                <td><input type="radio" name="q7" value="4" aria-label="Question 7 Disagree"></td>
+                <td><input type="radio" name="q7" value="3" aria-label="Question 7 Neutral"></td>
+                <td><input type="radio" name="q7" value="2" aria-label="Question 7 Agree"></td>
+                <td><input type="radio" name="q7" value="0" aria-label="Question 7 Strongly Agree"></td>
+              </tr>
+              <tr>
+                <td>8. I hide my real problems, stress, or failures from others because I don't want to be perceived as weak or incapable.</td>
+                <td><input type="radio" name="q8" value="5" aria-label="Question 8 Strongly Disagree"></td>
+                <td><input type="radio" name="q8" value="4" aria-label="Question 8 Disagree"></td>
+                <td><input type="radio" name="q8" value="3" aria-label="Question 8 Neutral"></td>
+                <td><input type="radio" name="q8" value="2" aria-label="Question 8 Agree"></td>
+                <td><input type="radio" name="q8" value="0" aria-label="Question 8 Strongly Agree"></td>
+              </tr>
+              <tr>
+                <td>9. I feel intense pressure to perform perfectly academically or professionally so that others don't look down on me.</td>
+                <td><input type="radio" name="q9" value="5" aria-label="Question 9 Strongly Disagree"></td>
+                <td><input type="radio" name="q9" value="4" aria-label="Question 9 Disagree"></td>
+                <td><input type="radio" name="q9" value="3" aria-label="Question 9 Neutral"></td>
+                <td><input type="radio" name="q9" value="2" aria-label="Question 9 Agree"></td>
+                <td><input type="radio" name="q9" value="0" aria-label="Question 9 Strongly Agree"></td>
+              </tr>
+              <tr>
+                <td>10. The fear of what people might think of me holds me back from trying new hobbies or pursuing my true goals.</td>
+                <td><input type="radio" name="q10" value="5" aria-label="Question 10 Strongly Disagree"></td>
+                <td><input type="radio" name="q10" value="4" aria-label="Question 10 Disagree"></td>
+                <td><input type="radio" name="q10" value="3" aria-label="Question 10 Neutral"></td>
+                <td><input type="radio" name="q10" value="2" aria-label="Question 10 Agree"></td>
+                <td><input type="radio" name="q10" value="0" aria-label="Question 10 Strongly Agree"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Centered Submit Button -->
+        <div class="submit-container">
+          <button type="button" class="btn-submit" onclick="calculateScore()">Submit Assessment</button>
+        </div>
+      </form>
+
+      <!-- Score Box displaying Total Marks & Categorized Message Only -->
+      <div class="score-box" id="resultBox" aria-live="polite">
+        <h2>Assessment Result</h2>
+        <div class="score-number" id="scoreDisplay">0 / 50</div>
+        <p class="score-message" id="messageDisplay"></p>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Accessible Footer -->
+  <footer role="contentinfo">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h3>InnerBloom Mental Wellness</h3>
+        <p>Compassionate care for a healthier, happier you.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="INDEX.PHP">Home</a></li>
+          <li><a href="dashboard.php">Dashboard</a></li>
+          <li><a href="bookappointment.php">Book Session</a></li>
+          <li><a href="questionnaire.php">Fact Finder</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Our Services</h4>
+        <ul>
+          <li><a href="#">Counseling</a></li>
+          <li><a href="#">Therapy</a></li>
+          <li><a href="#">Online Consultation</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p>Email: support@innerbloom.com</p>
+        <p>Phone: +880 1234-567890</p>
+        <p>Location: Dhaka, Bangladesh</p>
+      </div>
+    </div>
+    <div class="copyright">
+      &copy; 2026 InnerBloom Mental Wellness. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- SCRIPT -->
+  <script>
+    function calculateScore() {
+      const totalQuestions = 10;
+      let total = 0;
+      let allAnswered = true;
+      const errorAlert = document.getElementById('errorAlert');
+
+      // Loop through all 10 questions to enforce completion and calculate score
+      for (let i = 1; i <= totalQuestions; i++) {
+        const selected = document.querySelector(`input[name="q${i}"]:checked`);
+        if (!selected) {
+          allAnswered = false;
+          break;
+        }
+        total += parseInt(selected.value, 10);
+      }
+
+      // Check if all questions are answered
+      if (!allAnswered) {
+        errorAlert.style.display = 'block';
+        window.scrollTo({ top: errorAlert.offsetTop - 100, behavior: 'smooth' });
+        return;
+      } else {
+        errorAlert.style.display = 'none';
+      }
+
+      // Generate Categorized Message based on full range (0 to 50)
+      let resultText = "";
+      let textColor = "";
+
+      if (total >= 0 && total <= 12) {
+        textColor = "#991b1b"; // High contrast red
+        resultText = "⚠️ High Distress & Anxiety — Your answers suggest you are currently carrying an overwhelming burden of social anxiety and stress. We strongly encourage you to talk to a qualified professional or reach out to our team for guidance.";
+      } else if (total >= 13 && total <= 25) {
+        textColor = "#c2410c"; // High contrast orange
+        resultText = "😟 Moderate Stress Detected — You seem to be experiencing notable pressure and worry regarding external judgments. Practicing targeted mindfulness, boundary setting, and routine self-care will be beneficial.";
+      } else if (total >= 26 && total <= 38) {
+        textColor = "#15803d"; // High contrast green
+        resultText = "🌿 Good Mental Balance — You maintain a strong sense of personal emotional health and resilience. Keep building on your healthy self-perception and coping habits!";
+      } else if (total >= 39 && total <= 50) {
+        textColor = "#166534"; // High contrast deep green
+        resultText = "🔥 Exceptional Wellbeing — You possess an outstanding level of confidence, self-assurance, and emotional resilience. You handle social expectations with incredible ease and strength!";
+      }
+
+      // Display Total Marks and Categorized Message only
+      const resultBox = document.getElementById("resultBox");
+      const scoreDisplay = document.getElementById("scoreDisplay");
+      const messageDisplay = document.getElementById("messageDisplay");
+
+      scoreDisplay.textContent = `Total Score: ${total} / 50`;
+      messageDisplay.textContent = resultText;
+      messageDisplay.style.color = textColor;
+
+      resultBox.style.display = "block";
+      resultBox.scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+
+</body>
+</html>

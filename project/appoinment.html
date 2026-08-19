@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointments - Inner Bloom</title>
+
+   
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        :root {
+        
+            --primary-blue: #1d4ed8;       
+            --dark-blue: #1e3a8a;          
+            --light-blue: #eff6ff;         
+            --border-color: #cbd5e1;       
+            --text-dark: #0f172a;          
+            --text-muted: #475569;         
+            --white: #ffffff;
+            --success-green: #15803d;
+            --error-red: #b91c1c;
+            --focus-ring: #2563eb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light-blue);
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Headlines set to Poppins (Bold) */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+
+    
+        a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
+            outline: 3px solid var(--focus-ring);
+            outline-offset: 2px;
+        }
+
+        /* HEADER SECTION */
+        .header {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 14px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header-logo {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+        }
+
+        .header-title {
+            font-size: 22px;
+            color: var(--white);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .nav-btn {
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--white);
+            color: var(--primary-blue);
+        }
+
+        .nav-btn:hover {
+            background-color: #f1f5f9;
+        }
+
+        /* MAIN LAYOUT */
+        .main-container {
+            max-width: 1280px;
+            margin: 30px auto;
+            padding: 0 20px;
+            width: 100%;
+            flex-grow: 1;
+        }
+
+        .page-title-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .card {
+            background: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            margin-bottom: 25px;
+        }
+
+        /* ADD APPOINTMENT FORM */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-top: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 14px;
+        }
+
+        input, select {
+            padding: 10px 12px;
+            border: 1.5px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 14px;
+            color: var(--text-dark);
+            background: var(--white);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-submit {
+            grid-column: 1 / -1;
+            padding: 12px;
+            background-color: var(--primary-blue);
+            color: var(--white);
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            transition: background-color 0.2s ease;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--dark-blue);
+        }
+
+        /* SEARCH & FILTER CONTROLS */
+        .filter-box {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .filter-input {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        /* APPOINTMENTS TABLE */
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        th {
+            background-color: var(--light-blue);
+            color: var(--dark-blue);
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            padding: 12px 16px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        tr:hover {
+            background-color: #f8fafc;
+        }
+
+        .badge-type {
+            background-color: #dbeafe;
+            color: var(--primary-blue);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER SECTION -->
+    <header class="header" role="banner">
+        <div class="header-brand">
+            <img src="logo.png" alt="InnerBloom Logo" class="header-logo">
+            <a href="doctordashboard.php" class="header-title"><strong>InnerBloom</strong></a>
+        </div>
+        <nav class="header-actions" aria-label="Main Navigation">
+            <a href="doctordashboard.php" class="nav-btn" aria-label="Go to Dashboard">
+                <i class="fa-solid fa-chart-line" aria-hidden="true"></i> Dashboard
+            </a>
+        </nav>
+    </header>
+
+    <main class="main-container" id="main-content">
+
+        <div class="page-title-box">
+            <h1>Appointments Management</h1>
+        </div>
+
+        <!-- NEW APPOINTMENT REGISTRATION CARD -->
+        <section class="card" aria-labelledby="add-heading">
+            <h2 id="add-heading" style="color: var(--dark-blue); font-size: 18px;"><i class="fa-solid fa-calendar-plus"></i> Schedule New Appointment</h2>
+            <form id="appointment-form">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="patientName">Patient Name</label>
+                        <input type="text" id="patientName" required placeholder="e.g. John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label for="apptDate">Date</label>
+                        <input type="date" id="apptDate" required value="2026-08-05">
+                    </div>
+                    <div class="form-group">
+                        <label for="apptTime">Time</label>
+                        <input type="time" id="apptTime" required value="10:00">
+                    </div>
+                    <div class="form-group">
+                        <label for="apptType">Consultation Type</label>
+                        <select id="apptType" required>
+                            <option value="Consultation">Consultation</option>
+                            <option value="Follow-up">Follow-up</option>
+                            <option value="Routine Checkup">Routine Checkup</option>
+                            <option value="Therapy Session">Therapy Session</option>
+                            <option value="Online Session">Online Session</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-submit"><i class="fa-solid fa-plus"></i> Add Appointment</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- APPOINTMENTS LIST & FILTER SECTION -->
+        <section class="card" aria-labelledby="list-heading">
+            <h2 id="list-heading" style="color: var(--dark-blue); font-size: 18px; margin-bottom: 15px;"><i class="fa-solid fa-list-check"></i> Scheduled Appointments List (<span id="total-count">20</span>)</h2>
+            
+            <div class="filter-box">
+                <div class="form-group filter-input">
+                    <label for="searchInput">Search Patient or Type</label>
+                    <input type="text" id="searchInput" placeholder="Type name or service type..." onkeyup="filterAppointments()">
+                </div>
+                <div class="form-group filter-input">
+                    <label for="filterDate">Filter by Specific Date</label>
+                    <input type="date" id="filterDate" onchange="filterAppointments()">
+                </div>
+                <!-- DAY-WISE SORT OPTION -->
+                <div class="form-group filter-input">
+                    <label for="sortOrder">Day-Wise Sort</label>
+                    <select id="sortOrder" onchange="filterAppointments()">
+                        <option value="asc">Date: Earliest to Latest</option>
+                        <option value="desc">Date: Latest to Earliest</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Patient Name</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Time</th>
+                            <th scope="col">Type</th>
+                        </tr>
+                    </thead>
+                    <tbody id="appointments-tbody">
+                        <!-- Dynamic JavaScript Rows -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Pre-stored 20 initial appointments for August 2026
+        let appointments = [
+            { id: 1, name: "John Doe", date: "2026-08-05", time: "09:00 AM", type: "Consultation" },
+            { id: 2, name: "Jane Smith", date: "2026-08-05", time: "10:30 AM", type: "Routine Checkup" },
+            { id: 3, name: "Carlos Martinez", date: "2026-08-05", time: "01:15 PM", type: "Follow-up" },
+            { id: 4, name: "Sophia Patel", date: "2026-08-05", time: "03:00 PM", type: "Dermatology" },
+            { id: 5, name: "Liam Johnson", date: "2026-08-06", time: "09:30 AM", type: "Therapy Session" },
+            { id: 6, name: "Olivia Brown", date: "2026-08-06", time: "11:00 AM", type: "Cardiology" },
+            { id: 7, name: "Ethan Davis", date: "2026-08-06", time: "02:30 PM", type: "Routine Checkup" },
+            { id: 8, name: "Sarah Jenkins", date: "2026-08-07", time: "10:00 AM", type: "Consultation" },
+            { id: 9, name: "Michael Chang", date: "2026-08-07", time: "11:30 AM", type: "Follow-up" },
+            { id: 10, name: "Emily Watson", date: "2026-08-08", time: "02:00 PM", type: "Routine Checkup" },
+            { id: 11, name: "David Miller", date: "2026-08-08", time: "03:30 PM", type: "Therapy Session" },
+            { id: 12, name: "Jessica Taylor", date: "2026-08-10", time: "09:15 AM", type: "Consultation" },
+            { id: 13, name: "Robert Wilson", date: "2026-08-10", time: "01:00 PM", type: "Follow-up" },
+            { id: 14, name: "Amanda White", date: "2026-08-12", time: "11:00 AM", type: "Routine Checkup" },
+            { id: 15, name: "James Anderson", date: "2026-08-15", time: "09:00 AM", type: "Consultation" },
+            { id: 16, name: "Patricia Thomas", date: "2026-08-17", time: "10:45 AM", type: "Routine Checkup" },
+            { id: 17, name: "Christopher Jackson", date: "2026-08-20", time: "02:15 PM", type: "Consultation" },
+            { id: 18, name: "Barbara Harris", date: "2026-08-23", time: "11:30 AM", type: "Follow-up" },
+            { id: 19, name: "Daniel Martin", date: "2026-08-26", time: "03:00 PM", type: "Routine Checkup" },
+            { id: 20, name: "Nancy Thompson", date: "2026-08-30", time: "10:00 AM", type: "Consultation" }
+        ];
+
+        function renderAppointments(dataList) {
+            const tbody = document.getElementById('appointments-tbody');
+            document.getElementById('total-count').textContent = dataList.length;
+
+            if (dataList.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" class="empty-state">No matching appointments found.</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = dataList.map((item, index) => `
+                <tr>
+                    <td><strong>${index + 1}</strong></td>
+                    <td>${item.name}</td>
+                    <td>${item.date}</td>
+                    <td>${item.time}</td>
+                    <td><span class="badge-type">${item.type}</span></td>
+                </tr>
+            `).join('');
+        }
+
+        function filterAppointments() {
+            const searchValue = document.getElementById('searchInput').value.toLowerCase();
+            const dateValue = document.getElementById('filterDate').value;
+            const sortOrder = document.getElementById('sortOrder').value;
+
+            // 1. Filter by Search input & Specific Date
+            let filtered = appointments.filter(item => {
+                const matchesSearch = item.name.toLowerCase().includes(searchValue) || item.type.toLowerCase().includes(searchValue);
+                const matchesDate = dateValue === "" || item.date === dateValue;
+                return matchesSearch && matchesDate;
+            });
+
+            // 2. Day-wise Sorting Logic
+            filtered.sort((a, b) => {
+                const dateA = new Date(a.date);
+                const dateB = new Date(b.date);
+                return sortOrder === 'asc' ? dateA - dateB : dateB - dateA;
+            });
+
+            renderAppointments(filtered);
+        }
+
+        // Handle Add New Appointment
+        document.getElementById('appointment-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('patientName').value.trim();
+            const date = document.getElementById('apptDate').value;
+            let time = document.getElementById('apptTime').value;
+            const type = document.getElementById('apptType').value;
+
+            // Convert HTML5 24h time input to 12h AM/PM format
+            if (time) {
+                const [hours, minutes] = time.split(':');
+                const hourNum = parseInt(hours, 10);
+                const ampm = hourNum >= 12 ? 'PM' : 'AM';
+                const formattedHour = hourNum % 12 || 12;
+                time = `${String(formattedHour).padStart(2, '0')}:${minutes} ${ampm}`;
+            }
+
+            if (name && date && time) {
+                const newAppt = {
+                    id: appointments.length + 1,
+                    name: name,
+                    date: date,
+                    time: time,
+                    type: type
+                };
+                //new Appointment Add
+                appointments.unshift(newAppt);
+                filterAppointments();
+                this.reset();
+            }
+        });
+
+        // Initial Load
+        document.addEventListener('DOMContentLoaded', () => {
+            filterAppointments();
+        });
+    </script>
+</body>
+</html>

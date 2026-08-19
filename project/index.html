@@ -1,0 +1,888 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InnerBloom - Mental Wellbeing</title>
+    
+    <!-- Google Fonts: Poppins (Headlines) & Inter (Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        :root {
+            --primary-blue: #1E40AF;
+            --primary-blue-dark: #1E3A8A;
+            --primary-blue-light: #EFF6FF;
+            --navy-dark: #0F172A;
+            --navy-deep: #0B192C;
+            --accent-green: #15803D;
+            --accent-green-light: #EBF4F1;
+            --text-dark: #0F172A;
+            --text-muted: #475569;
+            --white: #FFFFFF;
+            --border-color: #E2E8F0;
+            --font-creative: 'Poppins', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        /* Base Resets */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text-dark);
+            background-color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul, ol {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Accessibility Focus States & Skip Link */
+        .skip-link {
+            position: absolute;
+            top: -50px;
+            left: 12px;
+            background: var(--white);
+            color: var(--primary-blue);
+            padding: 8px 16px;
+            z-index: 100;
+            border-radius: 6px;
+            transition: top 0.2s ease;
+        }
+
+        .skip-link:focus {
+            top: 12px;
+        }
+
+        a:focus-visible, button:focus-visible {
+            outline: 3px solid var(--white);
+            outline-offset: 3px;
+        }
+
+        .container {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .creative-title {
+            font-family: var(--font-creative);
+            font-weight: 600;
+        }
+
+        /* 1. HEADER NAVBAR */
+        header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 40;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.25);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .nav-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 6px 24px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .logo-container img {
+            height: 100px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .brand-name {
+            font-size: 1.4rem;
+            color: var(--white);
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .nav-link {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.95);
+            padding: 6px 14px;
+            border-radius: 8px;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: var(--white);
+        }
+
+        /* 2. HERO BANNER BLOCK */
+        .hero-section {
+            position: relative;
+            min-height: 640px;
+            display: flex;
+            align-items: center;
+            background-color: var(--navy-dark);
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+
+        .hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            opacity: 0.85;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            padding: 120px 0 60px 0;
+            display: flex;
+            justify-content: flex-start;
+            width: 100%;
+        }
+
+        .hero-card {
+            max-width: 520px;
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 40px;
+            border-radius: 8px;
+            color: var(--white);
+            text-align: left;
+        }
+
+        .hero-card h1 {
+            font-size: 2.2rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 28px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .badge-icon {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            flex-shrink: 0;
+        }
+
+        .badge-green { background-color: #3b748d; color: var(--white); }
+        .badge-blue { background-color: #1f3f4b; color: var(--white); }
+
+        .btn-group {
+            display: flex;
+            justify-content: flex-start;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .btn-main {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 28px;
+            font-size: 0.9rem;
+            border-radius: 6px;
+            cursor: pointer;
+            border: none;
+            transition: transform 0.2s, background-color 0.2s;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .btn-main:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-primary { background-color: var(--primary-blue); color: var(--white); }
+        .btn-primary:hover { background-color: var(--primary-blue-dark); }
+
+        .btn-secondary { background-color: var(--accent-green); color: var(--white); }
+        .btn-secondary:hover { background-color: #11632e; }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            color: var(--white);
+        }
+        .btn-outline:hover {
+            background-color: var(--white);
+            color: var(--navy-dark);
+        }
+
+        .btn-close { background-color: var(--text-muted); color: var(--white); margin-top: 16px; }
+        .btn-close:hover { background-color: var(--text-dark); }
+
+        /* SECTIONS GENERAL */
+        .section-padding { padding: 80px 0; }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        @media (min-width: 992px) {
+            .grid-2 { grid-template-columns: 1fr 1fr; }
+        }
+
+        .section-tag {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--primary-blue);
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            color: var(--text-dark);
+            margin-bottom: 16px;
+        }
+
+        .section-desc {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin-bottom: 24px;
+        }
+
+        /* MISSION BANNER */
+        .mission-box {
+            background-color: var(--primary-blue-light);
+            border-radius: 12px;
+            padding: 40px;
+            border: 1px solid #DBEAFE;
+        }
+
+        .badge-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .value-badge {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .value-badge .icon-box {
+            width: 38px;
+            height: 38px;
+            background-color: #DBEAFE;
+            color: var(--primary-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .value-badge span { font-size: 0.85rem; font-weight: 500; }
+
+        /* CORE VALUES GRID */
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            transition: box-shadow 0.2s;
+        }
+
+        .card:hover { box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.06); }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            background-color: var(--primary-blue-light);
+            color: var(--primary-blue);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px auto;
+            font-size: 1.25rem;
+        }
+
+        /* STATS SECTION */
+        .stats-section {
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 40px 0;
+            background-color: #F8FAFC;
+        }
+
+        .stats-flex {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        @media (min-width: 992px) {
+            .stats-flex {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+        }
+
+        @media (min-width: 576px) {
+            .stats-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+
+        .stat-num {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-blue);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: #0F172A;
+            color: #F8FAFC;
+            padding-top: 60px;
+            padding-bottom: 24px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand p {
+            font-size: 0.95rem;
+            color: #E2E8F0;
+            margin-top: 12px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .social-links a {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: #1E293B;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            transition: background-color 0.2s;
+            color: #F8FAFC;
+        }
+
+        .social-links a:hover { background-color: #3B82F6; }
+
+        .footer-col h3 {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #60A5FA;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            color: #CBD5E1;
+        }
+
+        .footer-col ul li a:hover { color: #F8FAFC; }
+
+        .copyright {
+            border-top: 1px solid #1E293B;
+            padding-top: 20px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #94A3B8;
+        }
+
+        /* MODAL POPUPS & OVERLAY STYLING */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 90;
+            display: none;
+        }
+
+        .modal-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--white);
+            padding: 32px;
+            border-radius: 12px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            z-index: 100;
+            width: 90%;
+            max-width: 440px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Accessibility Skip Link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- 1. HEADER NAVBAR -->
+    <header>
+        <div class="container nav-wrapper">
+            <!-- Logo -->
+            <a href="index.php" class="logo-container" aria-label="InnerBloom Home">
+                <img src="logo.png" alt="InnerBloom Logo">
+                <span class="creative-title brand-name">InnerBloom</span>
+            </a>
+
+            <!-- Header Navigation Links -->
+            <nav class="nav-menu" aria-label="Main Navigation">
+                <a href="login.php" class="nav-link">Log In</a>
+                <a href="registerform.php" class="nav-link">Sign Up</a>
+                <a href="doctorsenrollment.php" class="nav-link">
+                    <i class="fa-solid fa-user-md" aria-hidden="true"></i> Doctors Login
+                </a>
+                <a href="others1.html" class="nav-link">Questionnaire</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <!-- 2. HERO BANNER BLOCK -->
+        <section class="hero-section" aria-label="Hero Banner">
+            <div class="hero-bg">
+                <img src="98.jpg" alt="InnerBloom Serene Mental Wellbeing Background">
+            </div>
+
+            <div class="container hero-content">
+                <div class="hero-card">
+                    <h1 class="creative-title">Your wellbeing, our unwavering mission</h1>
+                    
+                    <ul class="feature-list">
+                        <li class="feature-item">
+                            <span class="badge-icon badge-green"><i class="fa-solid fa-check" aria-hidden="true"></i></span>
+                            Verified Mental Health Experts
+                        </li>
+                        <li class="feature-item">
+                            <span class="badge-icon badge-blue"><i class="fa-solid fa-lock" aria-hidden="true"></i></span>
+                            Private &amp; Secure Consultations
+                        </li>
+                        <li class="feature-item">
+                            <span class="badge-icon badge-green"><i class="fa-solid fa-check" aria-hidden="true"></i></span>
+                            24/7 Support &amp; Wellbeing Tools
+                        </li>
+                    </ul>
+
+                    <div class="btn-group">
+                        <button id="getStartedBtn" type="button" class="btn-main btn-primary">
+                            Get Started
+                        </button>
+                        
+                        <button id="howWorksBtn" type="button" class="btn-main btn-outline">
+                            How It Works
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. ABOUT US SECTION -->
+        <section class="container section-padding">
+            <div class="grid-2">
+                <div>
+                    <span class="section-tag">About Us</span>
+                    <h2 class="creative-title section-title">About InnerBloom</h2>
+                    <p class="section-desc">
+                        InnerBloom is a comprehensive mental wellbeing management system designed to support individuals, organizations, and communities in nurturing better mental health every day.
+                    </p>
+                    <a href="registrationform.php" class="btn-main btn-primary">
+                        Start Your Wellness Journey
+                    </a>
+                </div>
+                
+                <div style="text-align: center;">
+                    <img src="104.jpg" alt="InnerBloom Mental Wellbeing Illustration" style="border-radius: 12px; margin: 0 auto;">
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. OUR MISSION BANNER SECTION -->
+        <section class="container" style="margin-bottom: 80px;">
+            <div class="mission-box grid-2">
+                <div>
+                    <img src="102.jpg" alt="Group of people talking happily" style="border-radius: 12px; height: 280px; width: 100%; object-fit: cover;">
+                </div>
+                
+                <div>
+                    <span class="section-tag" style="color: var(--accent-green);">Our Mission</span>
+                    <h2 class="creative-title section-title">Empowering minds.<br>Enriching lives.</h2>
+                    <p class="section-desc">
+                        We believe that mental wellbeing is the foundation of a healthy, fulfilling life. Our mission is to build a safe, inclusive, and empowering platform that makes mental wellbeing support accessible to all.
+                    </p>
+                    
+                    <div class="badge-grid">
+                        <div class="value-badge">
+                            <div class="icon-box"><i class="fa-solid fa-people-holding" aria-hidden="true"></i></div>
+                            <span>Accessible Support</span>
+                        </div>
+                        <div class="value-badge">
+                            <div class="icon-box"><i class="fa-solid fa-lock" aria-hidden="true"></i></div>
+                            <span>Private &amp; Secure</span>
+                        </div>
+                        <div class="value-badge">
+                            <div class="icon-box"><i class="fa-solid fa-heart-pulse" aria-hidden="true"></i></div>
+                            <span>Evidence-Based</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. OUR CORE VALUES SECTION -->
+        <section class="container" style="margin-bottom: 80px; text-align: center;">
+            <span class="section-tag">What We Stand For</span>
+            <h2 class="creative-title section-title">Our Core Values</h2>
+
+            <div class="grid-4">
+                <div class="card">
+                    <div class="card-icon"><i class="fa-solid fa-users" aria-hidden="true"></i></div>
+                    <h3>Empathy</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 8px;">We listen, we care, and we're here for you.</p>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></div>
+                    <h3>Trust</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 8px;">Your privacy and trust are our top priorities.</p>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon"><i class="fa-solid fa-lightbulb" aria-hidden="true"></i></div>
+                    <h3>Growth</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 8px;">We encourage continuous growth and self-discovery.</p>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon"><i class="fa-solid fa-user-group" aria-hidden="true"></i></div>
+                    <h3>Inclusion</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 8px;">We celebrate diversity and foster belonging.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. FEATURE DIAGRAM SECTION -->
+        <section class="container" style="margin-bottom: 80px;">
+            <div class="grid-2">
+                <div>
+                    <span class="section-tag" style="color: var(--accent-green);">Why Choose InnerBloom?</span>
+                    <h2 class="creative-title section-title">Support that grows with you</h2>
+                    <p class="section-desc">
+                        InnerBloom offers a holistic approach to mental wellbeing, combining technology, expertise, and compassion.
+                    </p>
+                    
+                    <ul class="feature-list">
+                        <li class="feature-item" style="color: var(--text-dark);">
+                            <span class="badge-icon badge-green"><i class="fa-solid fa-check" aria-hidden="true"></i></span>
+                            Personalized wellbeing assessments
+                        </li>
+                        <li class="feature-item" style="color: var(--text-dark);">
+                            <span class="badge-icon badge-green"><i class="fa-solid fa-check" aria-hidden="true"></i></span>
+                            Guided self-care tools &amp; resources
+                        </li>
+                        <li class="feature-item" style="color: var(--text-dark);">
+                            <span class="badge-icon badge-green"><i class="fa-solid fa-check" aria-hidden="true"></i></span>
+                            24/7 access to support &amp; guidance
+                        </li>
+                        <li class="feature-item" style="color: var(--text-dark);">
+                            <span class="badge-icon badge-green"><i class="fa-solid fa-check" aria-hidden="true"></i></span>
+                            Progress tracking &amp; insights
+                        </li>
+                    </ul>
+                </div>
+
+                <div style="text-align: center;">
+                    <img src="103.jpg" alt="InnerBloom Core Features Diagram" style="border-radius: 12px; margin: 0 auto;">
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. IMPACT STATS SECTION -->
+        <section class="stats-section">
+            <div class="container stats-flex">
+                <div>
+                    <h2 class="creative-title section-title" style="margin-bottom: 4px;">Our Impact</h2>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">Together, we're building a healthier, happier world.</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div>
+                        <div class="stat-num"><i class="fa-solid fa-user-plus" aria-hidden="true"></i> 10K+</div>
+                        <span style="font-size: 0.75rem; color: var(--text-muted);">Active Users</span>
+                    </div>
+                    <div>
+                        <div class="stat-num"><i class="fa-solid fa-briefcase" aria-hidden="true"></i> 500+</div>
+                        <span style="font-size: 0.75rem; color: var(--text-muted);">Wellbeing Resources</span>
+                    </div>
+                    <div>
+                        <div class="stat-num"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> 50+</div>
+                        <span style="font-size: 0.75rem; color: var(--text-muted);">Expert Partners</span>
+                    </div>
+                    <div>
+                        <div class="stat-num"><i class="fa-solid fa-star" aria-hidden="true"></i> 4.8/5</div>
+                        <span style="font-size: 0.75rem; color: var(--text-muted);">User Satisfaction</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. CTA SECTION -->
+        <section class="container section-padding" style="text-align: center;">
+            <h2 class="creative-title section-title">Let's Bloom Together</h2>
+            <p class="section-desc" style="max-width: 500px; margin: 0 auto 24px auto;">
+                Whether you're beginning your wellness journey or supporting others, InnerBloom is here to help you thrive.
+            </p>
+            <a href="registrationform.php" class="btn-main btn-primary">
+                <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i> Join InnerBloom Today
+            </a>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <img src="logo.png" alt="" style="height: 32px; filter: brightness(2);">
+                        <span class="creative-title" style="font-size: 1.4rem;">InnerBloom</span>
+                    </div>
+                    <p>Your mental wellbeing matters. Always.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.php">Home</a></li>
+                        <li><a href="resource.html">Resources</a></li>
+                        <li><a href="others1.html">Questionnaire</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="login.php">User Login</a></li>
+                        <li><a href="doctorsenrollment.php">Doctors Login</a></li>
+                        <li><a href="subscription.php">Subscription</a></li>
+                        <li><a href="registrationform.php">Sign Up</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><i class="fa-regular fa-envelope" aria-hidden="true"></i> hello@innerbloom.com</li>
+                        <li><i class="fa-solid fa-phone" aria-hidden="true"></i> +1 (234) 567-8901</li>
+                        <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> 123 Wellness Way, Mindful City</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="copyright">
+                &copy; 2026 InnerBloom. All rights reserved. Built according to Section 508 and WCAG 2.1 AA Standards.
+            </div>
+        </div>
+    </footer>
+
+    <!-- OVERLAY & ACCESSIBLE POPUP CONTAINERS -->
+    <div id="overlay" class="overlay" aria-hidden="true"></div>
+
+    <!-- Get Started Popup -->
+    <div id="getStartedPopup" class="modal-popup" role="dialog" aria-modal="true" aria-labelledby="getStartedTitle" tabindex="-1">
+        <div style="text-align: center;">
+            <h3 id="getStartedTitle" class="creative-title" style="font-size: 1.4rem; margin-bottom: 8px;">Welcome to InnerBloom</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">Choose an option to continue:</p>
+            
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+                <button type="button" onclick="openLogin()" class="btn-main btn-primary" style="width: 100%;">Log In to Existing Account</button>
+                <button type="button" onclick="openRegister()" class="btn-main btn-secondary" style="width: 100%;">Create New Account</button>
+            </div>
+            
+            <button type="button" onclick="closeAllModals()" style="background: none; border: none; margin-top: 16px; color: var(--text-muted); cursor: pointer; font-size: 0.8rem;">Cancel</button>
+        </div>
+    </div>
+
+    <!-- How It Works Popup -->
+    <div id="howWorksPopup" class="modal-popup" role="dialog" aria-modal="true" aria-labelledby="howWorksTitle" tabindex="-1">
+        <div>
+            <h3 id="howWorksTitle" class="creative-title" style="font-size: 1.4rem; margin-bottom: 12px;">How It Works</h3>
+            <ul style="list-style: disc; margin-left: 20px; color: var(--text-muted); font-size: 0.9rem; display: flex; flex-direction: column; gap: 8px;">
+                <li>Complete Sign Up / Login</li>
+                <li>Profile Setup</li>
+                <li>Personalized Recommendations</li>
+                <li>Booking a Session</li>
+                <li>Tracking &amp; Progress</li>
+            </ul>
+            <button class="btn-main btn-close" onclick="closeAllModals()" style="width: 100%;">Close</button>
+        </div>
+    </div>
+
+    <!-- JavaScript Controller -->
+    <script>
+        const getStartedBtn   = document.getElementById('getStartedBtn');
+        const howWorksBtn     = document.getElementById('howWorksBtn');
+        const overlay         = document.getElementById('overlay');
+        const getStartedPopup = document.getElementById('getStartedPopup');
+        const howWorksPopup   = document.getElementById('howWorksPopup');
+        
+        let lastActiveElement = null;
+
+        function openModal(modalElement, triggerBtn) {
+            lastActiveElement = triggerBtn || document.activeElement;
+            overlay.style.display = 'block';
+            overlay.setAttribute('aria-hidden', 'false');
+            modalElement.style.display = 'block';
+            modalElement.focus();
+        }
+
+        function closeAllModals() {
+            overlay.style.display = 'none';
+            overlay.setAttribute('aria-hidden', 'true');
+            getStartedPopup.style.display = 'none';
+            howWorksPopup.style.display = 'none';
+
+            if (lastActiveElement) {
+                lastActiveElement.focus();
+            }
+        }
+
+        if (getStartedBtn) {
+            getStartedBtn.addEventListener('click', (e) => openModal(getStartedPopup, e.currentTarget));
+        }
+
+        if (howWorksBtn) {
+            howWorksBtn.addEventListener('click', (e) => openModal(howWorksPopup, e.currentTarget));
+        }
+
+        overlay.addEventListener('click', closeAllModals);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' || e.key === 'Esc') {
+                closeAllModals();
+            }
+        });
+
+        function openLogin() {
+            window.location.href = "login.php";
+        }
+
+        function openRegister() {
+            window.location.href = "registrationform.php";
+        }
+    </script>
+</body>
+</html>
